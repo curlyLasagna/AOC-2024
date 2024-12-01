@@ -1,0 +1,59 @@
+#+title: Readme
+#+options: html-link-use-abs-url:nil html-postamble:auto html-preamble:nil html-postamble:nil
+#+options: html-scripts:nil html-style:t html5-fancy:nil tex:t num:nil
+#+html_doctype: xhtml-strict
+#+html_container: div
+#+html_content_class: content
+#+description:
+#+keywords:
+#+html_link_home:
+#+html_link_up:
+#+html_mathjax:
+#+html_equation_reference_format: \eqref{%s}
+#+html_head:
+#+html_head_extra:
+#+subtitle:
+#+infojs_opt:
+#+creator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 29.4 (<a href="https://orgmode.org">Org</a> mode 9.7.11)
+#+latex_header:
+
+* Day 1
+
+** Part 1
+
+First sort both lists
+#+begin_src python
+l1: list[int] = []
+l2: list[int] = []
+    with open("input.txt") as f:
+        for line in f.readlines():
+            l1.append(int(line.split()[0]))
+            l2.append(int(line.split()[1]))
+
+    l1.sort()
+    l2.sort()
+#+end_src
+
+
+Create a variable to sum the absolute difference between each element of the sorted list
+#+begin_src python
+distance:int = 0
+for i in range(len(l1)):
+        distance += abs(l1[i] - l2[i])
+#+end_src
+
+
+
+** Part 2
+
+I created 2 hashmaps (for each respective lists) that counts the occurrences of each element in the list. I use the [[https://docs.python.org/3/library/collections.html#collections.Counter][Counter]] tool because I'm lazy.
+
+Create a variable called ~similarity_score~ to store our solution. I use the following equation to get the similarity score for each key: \(\text{Key} \times \text{map1 value at key} \times \text{map2 value at key}\)
+
+#+begin_src python
+map1 = Counter(l1)
+map2 = Counter(l2)
+
+    for e in map1:
+        similarity_score += e * map1[e] * map2[e]
+#+end_src
