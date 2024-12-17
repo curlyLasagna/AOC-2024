@@ -16,5 +16,19 @@ def part1():
 
 def part2():
     with open("./input.txt") as f:
-        pattern = re.compile("")
-    pass
+        pattern = re.compile("do\\(\\)|don't\\(\\)|mul\\(*\\d+,\\d+\\)")
+        ops = re.findall(pattern, f.read())
+        do: bool = True
+        sum: int = 0
+        for op in ops:
+            if op == "don't()":
+                do = False
+                continue
+            elif op == 'do()':
+                do = True
+                continue
+            if do:
+                sum += runOps(op)
+
+        print(sum)
+part2()
