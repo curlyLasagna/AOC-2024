@@ -7,7 +7,7 @@ def runOps(ops: str) -> int:
 
 def part1(): 
     with open("./input.txt") as f:
-        pattern = re.compile("mul\\(*\\d+,\\d+\\)")
+        pattern = re.compile("mul\\(\\d+,\\d+\\)")
         ops = re.findall(pattern, f.read())
         sum: int = 0
         for o in ops:
@@ -16,7 +16,7 @@ def part1():
 
 def part2():
     with open("./input.txt") as f:
-        pattern = re.compile("do\\(\\)|don't\\(\\)|mul\\(*\\d+,\\d+\\)")
+        pattern = re.compile("do\\(\\)|don't\\(\\)|mul\\(\\d+,\\d+\\)")
         ops = re.findall(pattern, f.read())
         do: bool = True
         sum: int = 0
@@ -31,4 +31,4 @@ def part2():
                 sum += runOps(op)
 
         print(sum)
-part2()
+part1()
